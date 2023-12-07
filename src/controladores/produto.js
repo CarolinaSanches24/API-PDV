@@ -48,7 +48,7 @@ const obterProduto = async (req, res) => {
 
 const cadastrarProduto = async (req, res) => {
   const { descricao, quantidade_estoque, valor, categoria_id } = req.body;
-  const { originalname, mimetype, buffer } = req.file;
+
   try {
     let produto = await knex("produtos")
       .insert({
@@ -58,44 +58,68 @@ const cadastrarProduto = async (req, res) => {
         categoria_id,
       })
       .returning("*");
+    if (req.file) {
+      const { originalname, mimetype, buffer } = req.file;
+      const id = produto[0].id;
 
-    const id = produto[0].id;
-
-    const imagem = await uploadImagem(
-      `produtos/${id}/${originalname}`,
-      buffer,
-      mimetype
-    );
-    produto = await knex("produtos")
-      .update({
-        produto_imagem: imagem.url,
-      })
-      .where({ id })
-      .returning("*");
-    return res.status(200).json(produto);
+      const imagem = await uploadImagem(
+        `produtos/${id}/${originalname}`,
+        buffer,
+        mimetype
+      );
+      produto = await knex("produtos")
+        .update({
+          produto_imagem: imagem.url,
+        })
+        .where({ id })
+        .returning("*");
+      return res.status(201).json(produto);
+    }
+    return res.status(201).json(produto);
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({ mensagem: "Erro interno do servidor" });
   }
 };
 
 const atualizarProduto = async (req, res) => {
-  const { descricao, quantidade_estoque, valor, categoria_id } = req.body;
   const { id } = req.params;
+  const { descricao, quantidade_estoque, valor, categoria_id } = req.body;
 
   try {
-    const produto = {
-      descricao,
-      quantidade_estoque,
-      valor,
-      categoria_id,
-    };
+    if (req.file) {
+      const { originalname, mimetype, buffer } = req.file;
+      const id = req.params.id;
 
-    const atualizacaoDeProduto = await knex("produtos")
-      .update(produto)
-      .where({ id });
+      const imagem = await uploadImagem(
+        `produtos/${id}/${originalname}`,
+        buffer,
+        mimetype
+      );
 
-    return res.status(200).json({ mensagem: "Produto atualizado com sucesso" });
+      const produtoAtualizado = await knex("produtos")
+        .update({
+          produto_imagem: imagem.url,
+          descricao,
+          quantidade_estoque,
+          valor,
+          categoria_id,
+        })
+        .where({ id })
+        .returning("*");
+
+      return res.status(201).json(produtoAtualizado);
+    }
+
+    const produto = await knex("produtos")
+      .where({ id })
+      .update({
+        descricao,
+        quantidade_estoque,
+        valor,
+        categoria_id,
+      })
+      .returning("*");
+    return res.status(200).json(produto);
   } catch (error) {
     return res.status(500).json({ mensagem: "Erro interno do servidor" });
   }

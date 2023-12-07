@@ -20,14 +20,15 @@ rotas.get("/produto", autenticacao, listarProdutos);
 rotas.get("/produto/:id", autenticacao, obterProduto);
 rotas.post(
   "/produto",
+  multer.single("produto_imagem"),
   autenticacao,
-  // validarCamposObrigatorios(esquemaProduto),
+  validarCamposObrigatorios(esquemaProduto),
   verificarExistenciaDeCategoria,
-  multer.single("imagem"),
   cadastrarProduto
 );
 rotas.put(
   "/produto/:id",
+  multer.single("produto_imagem"),
   autenticacao,
   verificaProdutoExiste,
   validarCamposObrigatorios(esquemaProduto),

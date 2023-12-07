@@ -30,7 +30,7 @@ VALUES
     quantidade_estoque INTEGER NOT NULL,
     valor INTEGER NOT NULL,
     categoria_id INTEGER NOT NULL,
-    FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+   categoria_id INTEGER REFERENCES categorias(id)
 );
 
 CREATE TABLE clientes (
