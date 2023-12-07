@@ -24,6 +24,8 @@ const verificarExistenciaDeCategoria = async (req, res, next) => {
 
     next();
   } catch (error) {
+    console.log(error.message);
+    console.log(categoria_id);
     return res.status(500).json({ mensagem: "Erro interno do servidor!" });
   }
 };

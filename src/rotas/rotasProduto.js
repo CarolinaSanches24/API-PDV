@@ -1,5 +1,6 @@
 const express = require("express");
 const autenticacao = require("../intermediarios/autenticacao");
+const multer = require("../intermediarios/multer");
 const {
   cadastrarProduto,
   atualizarProduto,
@@ -20,8 +21,9 @@ rotas.get("/produto/:id", autenticacao, obterProduto);
 rotas.post(
   "/produto",
   autenticacao,
-  validarCamposObrigatorios(esquemaProduto),
+  // validarCamposObrigatorios(esquemaProduto),
   verificarExistenciaDeCategoria,
+  multer.single("imagem"),
   cadastrarProduto
 );
 rotas.put(

@@ -1,5 +1,6 @@
 const knex = require("../banco_de_dados/conexao");
-
+const s3 = require("../config/conexaoAWS");
+const { uploadImagem, deletarImagem } = require("../services/uploads");
 const listarProdutos = async (req, res) => {
   const { categoria_id } = req.query;
   try {
@@ -46,19 +47,34 @@ const obterProduto = async (req, res) => {
 };
 
 const cadastrarProduto = async (req, res) => {
+  const { descricao, quantidade_estoque, valor, categoria_id } = req.body;
+  const { originalname, mimetype, buffer } = req.file;
   try {
-    const { descricao, quantidade_estoque, valor, categoria_id } = req.body;
-    const novoProduto = {
-      descricao,
-      quantidade_estoque,
-      valor,
-      categoria_id,
-    };
+    let produto = await knex("produtos")
+      .insert({
+        descricao,
+        quantidade_estoque,
+        valor,
+        categoria_id,
+      })
+      .returning("*");
 
-    const cadastroDeNovoProduto = await knex("produtos").insert(novoProduto);
+    const id = produto[0].id;
 
-    return res.status(200).json({ mensagem: "Produto cadastrado com sucesso" });
+    const imagem = await uploadImagem(
+      `produtos/${id}/${originalname}`,
+      buffer,
+      mimetype
+    );
+    produto = await knex("produtos")
+      .update({
+        produto_imagem: imagem.url,
+      })
+      .where({ id })
+      .returning("*");
+    return res.status(200).json(produto);
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json({ mensagem: "Erro interno do servidor" });
   }
 };

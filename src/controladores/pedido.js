@@ -1,4 +1,4 @@
-const transportador = require("../../config/conexaoNodemailer");
+const transportador = require("../config/conexaoNodemailer");
 const knex = require("../banco_de_dados/conexao");
 
 const cadastrarPedido = async (req, res) => {
