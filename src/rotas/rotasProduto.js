@@ -11,6 +11,7 @@ const {
 const {
   verificaProdutoExiste,
   verificarExistenciaDeCategoria,
+  verificaPedidoAssociadoProduto,
 } = require("../intermediarios/validacoesProduto");
 const validarCamposObrigatorios = require("../intermediarios/validarCamposObrigatorios");
 const esquemaProduto = require("../esquemas/esquemaProduto");
@@ -39,6 +40,7 @@ rotas.delete(
   "/produto/:id",
   autenticacao,
   verificaProdutoExiste,
+  verificaPedidoAssociadoProduto,
   excluirProduto
 );
 

@@ -27,7 +27,23 @@ const verificarExistenciaDeCategoria = async (req, res, next) => {
     return res.status(500).json({ mensagem: "Erro interno do servidor!" });
   }
 };
+
+const verificaPedidoAssociadoProduto = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const pedido = await knex("pedido_produtos").where({ produto_id: id });
+    if (pedido) {
+      return res.status(400).json({
+        mensagem: "Não foi possível excluir produto associado a um pedido",
+      });
+    }
+    next();
+  } catch (error) {
+    return res.status(500).json({ mensagem: "Erro interno do Servidor!" });
+  }
+};
 module.exports = {
   verificaProdutoExiste,
   verificarExistenciaDeCategoria,
+  verificaPedidoAssociadoProduto,
 };

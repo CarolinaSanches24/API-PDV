@@ -128,23 +128,20 @@ const atualizarProduto = async (req, res) => {
 const excluirProduto = async (req, res) => {
   const { id } = req.params;
   try {
-    const produtoEncontrado = await knex("produtos")
-      .where({
-        id,
-      })
+    const urlProduto = await knex("produtos")
+      .select("produto_imagem")
+      .where({ id })
       .first();
 
-    if (!produtoEncontrado) {
-      return res.status(404).json("Produto não encontrado");
-    }
-    await deletarImagem(produtoEncontrado.produto_imagem);
+    await deletarImagem(urlProduto.produto_imagem);
 
-    const produtoAtualizado = await knex("produtos").where({ id }).update({
+    await knex("produtos").where({ id }).update({
       produto_imagem: null,
     });
 
-    const produto = await knex("produtos").where({ id }).del();
-    return res.status(200).json({ mensagem: "Produto excluido com Sucesso!" });
+    await knex("produtos").where({ id }).del();
+
+    return res.status(200).json({ mensagem: "Produto Excluído com Sucesso!" });
   } catch (error) {
     console.log(error.message);
     return res.status(500).json({ mensagem: "Erro interno do Servidor!" });
