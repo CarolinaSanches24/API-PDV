@@ -26,19 +26,12 @@ const fazerLogin = async (req, res) => {
   const { email, senha } = req.body;
 
   try {
-    const emailExiste = await knex("usuarios").where("email", email);
-
-    if (emailExiste.length == 0) {
-      return res.status(400).json({
-        mensagem: "Email ou senha inválidos. Por favor, tente novamente!",
-      });
-    }
-
     const senhaCriptografada = await knex("usuarios")
       .select("senha")
-      .where("email", email);
+      .where({ email })
+      .first();
 
-    const senhaValida = await compare(senha, senhaCriptografada[0].senha);
+    const senhaValida = await compare(senha, senhaCriptografada.senha);
 
     if (!senhaValida) {
       return res.status(400).json({
@@ -48,18 +41,18 @@ const fazerLogin = async (req, res) => {
 
     const usuario = await knex("usuarios")
       .select("id", "nome", "email")
-      .where("email", email);
+      .where({ email })
+      .first();
 
-    const idUsuarioLogado = usuario[0].id;
+    const idUsuarioLogado = usuario.id;
+
     const senhaJwt = process.env.senhaJwt;
     const token = jwt.sign({ id: idUsuarioLogado }, senhaJwt, {
       expiresIn: "8h",
     });
 
-    const dadosUsuario = usuario[0];
-
     const usuarioLogado = {
-      dadosUsuario,
+      usuario,
       token,
     };
 
@@ -75,7 +68,7 @@ const detalharUsuario = async (req, res) => {
   try {
     const usuario = await knex("usuarios")
       .select("id", "nome", "email")
-      .where("id", id);
+      .where({ id });
 
     if (usuario) {
       return res.status(200).json(usuario);

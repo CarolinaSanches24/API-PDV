@@ -10,17 +10,25 @@ const {
 } = require("../controladores/usuario");
 const verificarCamposObrigatorios = require("../intermediarios/validarCamposObrigatorios");
 const { esquemaUsuario, esquemaLogin } = require("../esquemas/esquemaUsuario");
-const verificaEmail = require("../intermediarios/validacoesUsuario");
+const {
+  verificaEmailCadastrado,
+  verificaEmailExiste,
+} = require("../intermediarios/validacoesUsuario");
 const validarCamposObrigatorios = require("../intermediarios/validarCamposObrigatorios");
 
 rotas.post(
   "/usuario",
   verificarCamposObrigatorios(esquemaUsuario),
-  verificaEmail,
+  verificaEmailCadastrado,
   cadastrarUsuario
 );
 
-rotas.post("/login", verificarCamposObrigatorios(esquemaLogin), fazerLogin);
+rotas.post(
+  "/login",
+  verificarCamposObrigatorios(esquemaLogin),
+  verificaEmailExiste,
+  fazerLogin
+);
 
 rotas.get("/usuario", autenticacao, detalharUsuario);
 
@@ -28,7 +36,7 @@ rotas.put(
   "/usuario",
   autenticacao,
   validarCamposObrigatorios(esquemaUsuario),
-  verificaEmail,
+  verificaEmailCadastrado,
   atualizarUsuario
 );
 

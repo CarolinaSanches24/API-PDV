@@ -28,11 +28,6 @@ const atualizarCliente = async (req, res) => {
   const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } =
     req.body;
   try {
-    const clienteExistente = await knex("clientes").where({ id });
-
-    if (clienteExistente.length === 0) {
-      return res.status(404).json({ mensagem: "Cliente não encontrado." });
-    }
     await knex("clientes")
       .where({ id })
       .update({ nome, email, cpf, cep, rua, numero, bairro, cidade, estado });

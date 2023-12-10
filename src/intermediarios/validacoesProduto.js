@@ -31,7 +31,9 @@ const verificarExistenciaDeCategoria = async (req, res, next) => {
 const verificaPedidoAssociadoProduto = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const pedido = await knex("pedido_produtos").where({ produto_id: id });
+    const pedido = await knex("pedido_produtos")
+      .where({ produto_id: id })
+      .first();
     if (pedido) {
       return res.status(400).json({
         mensagem: "Não foi possível excluir produto associado a um pedido",

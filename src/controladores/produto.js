@@ -89,6 +89,14 @@ const atualizarProduto = async (req, res) => {
     if (req.file) {
       const { originalname, mimetype, buffer } = req.file;
       const id = req.params.id;
+      const urlProduto = await knex("produtos")
+        .select("produto_imagem")
+        .where({ id })
+        .first();
+
+      if (urlProduto && urlProduto.produto_imagem) {
+        await deletarImagem(urlProduto.produto_imagem);
+      }
 
       const imagem = await uploadImagem(
         `produtos/${id}/${originalname}`,
@@ -107,7 +115,7 @@ const atualizarProduto = async (req, res) => {
         .where({ id })
         .returning("*");
 
-      return res.status(201).json(produtoAtualizado);
+      return res.status(200).json(produtoAtualizado);
     }
 
     const produto = await knex("produtos")
@@ -143,7 +151,6 @@ const excluirProduto = async (req, res) => {
 
     return res.status(200).json({ mensagem: "Produto Excluído com Sucesso!" });
   } catch (error) {
-    console.log(error.message);
     return res.status(500).json({ mensagem: "Erro interno do Servidor!" });
   }
 };

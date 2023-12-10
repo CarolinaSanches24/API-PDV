@@ -2,7 +2,7 @@ const express = require("express");
 const autenticacao = require("../intermediarios/autenticacao");
 const validacaoPedido = require("../intermediarios/validacoesPedido");
 const validarCamposObrigatorios = require("../intermediarios/validarCamposObrigatorios");
-const { cadastrarPedido } = require("../controladores/pedido");
+const { cadastrarPedido, listarPedidos } = require("../controladores/pedido");
 const esquemaPedido = require("../esquemas/esquemaPedido");
 const rotas = express();
 
@@ -13,4 +13,6 @@ rotas.post(
   validacaoPedido,
   cadastrarPedido
 );
+
+rotas.get("/pedido", listarPedidos);
 module.exports = rotas;
