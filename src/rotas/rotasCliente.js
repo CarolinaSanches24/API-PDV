@@ -8,7 +8,10 @@ const {
   detalharCliente,
 } = require("../controladores/cliente");
 const esquemaCliente = require("../esquemas/esquemaCliente");
-const { validarDadosCliente } = require("../intermediarios/validacoesCliente");
+const {
+  validarDadosCliente,
+  validarClienteExiste,
+} = require("../intermediarios/validacoesCliente");
 
 const rotas = express();
 
@@ -24,10 +27,11 @@ rotas.put(
   autenticacao,
   validarCamposObrigatorios(esquemaCliente),
   validarDadosCliente,
+  validarClienteExiste,
   atualizarCliente
 );
 
 rotas.get("/clientes", autenticacao, listarClientes);
-rotas.get("/cliente/:id", autenticacao, detalharCliente);
+rotas.get("/cliente/:id", autenticacao, validarClienteExiste, detalharCliente);
 
 module.exports = rotas;

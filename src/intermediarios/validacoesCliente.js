@@ -2,13 +2,8 @@ const knex = require("../banco_de_dados/conexao");
 
 const validarDadosCliente = async (req, res, next) => {
   const { email, cpf } = req.body;
-  const { id } = req.params;
-  try {
-    const clienteExistente = await knex("clientes").where({ id });
 
-    if (clienteExistente.length === 0) {
-      return res.status(404).json({ mensagem: "Cliente não encontrado." });
-    }
+  try {
     const emailClienteExiste = await knex("clientes").where({ email }).first();
     if (emailClienteExiste) {
       return res.status(400).json({
@@ -28,6 +23,20 @@ const validarDadosCliente = async (req, res, next) => {
   }
 };
 
+const validarClienteExiste = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const clienteExistente = await knex("clientes").where({ id });
+
+    if (clienteExistente.length === 0) {
+      return res.status(404).json({ mensagem: "Cliente não encontrado." });
+    }
+    next();
+  } catch (error) {
+    return res.status(500).json({ mensagem: "Erro interno do Servidor!" });
+  }
+};
 module.exports = {
   validarDadosCliente,
+  validarClienteExiste,
 };
