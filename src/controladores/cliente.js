@@ -1,4 +1,4 @@
-const knex = require("../banco_de_dados/conexao");
+const knex = require("../config/conexaoDB");
 
 const cadastrarCliente = async (req, res) => {
   const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } =

@@ -1,18 +1,29 @@
 const transportador = require("../config/conexaoNodemailer");
-const knex = require("../banco_de_dados/conexao");
+const knex = require("../config/conexaoDB");
 
 const cadastrarPedido = async (req, res) => {
   const { cliente_id, observacao, pedido_produtos } = req.body;
-  let valorTotalPedido = 0;
   try {
-    for (const itemPedido of pedido_produtos) {
-      const produto = await knex("produtos").select("id", "valor").where({
-        id: itemPedido.produto_id,
-      });
+    const consultarProdutos = pedido_produtos.map(async (itemPedido) => {
+      const produto = await knex("produtos")
+        .select("id", "valor")
+        .where({
+          id: itemPedido.produto_id,
+        })
+        .first();
 
-      const valorProduto = produto[0].valor * itemPedido.quantidade_produto;
-      valorTotalPedido += valorProduto;
-    }
+      const { valor } = produto;
+
+      return valor * itemPedido.quantidade_produto;
+    });
+
+    const valoresProdutos = await Promise.all(consultarProdutos);
+
+    const valorTotalPedido = valoresProdutos.reduce(
+      (total, valor) => total + valor,
+      0
+    );
+
     const novoPedido = await knex("pedidos")
       .insert({
         cliente_id,
