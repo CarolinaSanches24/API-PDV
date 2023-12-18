@@ -1,69 +1,4 @@
-const transportador = require("../config/conexaoNodemailer");
-const knex = require("../config/conexaoDB");
-
-const cadastrarPedido = async (req, res) => {
-  const { cliente_id, observacao, pedido_produtos } = req.body;
-  try {
-    const consultarProdutos = pedido_produtos.map(async (itemPedido) => {
-      const produto = await knex("produtos")
-        .select("id", "valor")
-        .where({
-          id: itemPedido.produto_id,
-        })
-        .first();
-
-      const { valor } = produto;
-
-      return valor * itemPedido.quantidade_produto;
-    });
-
-    const valoresProdutos = await Promise.all(consultarProdutos);
-
-    const valorTotalPedido = valoresProdutos.reduce(
-      (total, valor) => total + valor,
-      0
-    );
-
-    const novoPedido = await knex("pedidos")
-      .insert({
-        cliente_id,
-        observacao,
-        valor_total: valorTotalPedido,
-      })
-      .returning("*");
-
-    for (const itemPedido of pedido_produtos) {
-      const produto = await knex("produtos").select("id", "valor").where({
-        id: itemPedido.produto_id,
-      });
-      await knex("pedido_produtos").insert({
-        pedido_id: novoPedido[0].id,
-        produto_id: itemPedido.produto_id,
-        quantidade_produto: itemPedido.quantidade_produto,
-        valor_produto: produto[0].valor,
-      });
-    }
-
-    const cliente = await knex("clientes").where({ id: cliente_id });
-    const emailCliente = cliente[0].email;
-
-    const emailEnviado = {
-      from: "Carolina Sanches <carolinasanchestestes@gmail.com>",
-      to: emailCliente,
-      subject: "Pedido Efetuado com Sucesso",
-      text: "Tudo certo com seu Pedido , volte sempre",
-    };
-    const sendMail = async () => {
-      await transportador.sendMail(emailEnviado);
-    };
-
-    sendMail();
-
-    return res.status(200).json({ mensagem: "Pedido cadastrado com sucesso!" });
-  } catch (error) {
-    return res.status(500).json({ mensagem: "Erro interno do servidor!" });
-  }
-};
+const knex = require("../../config/conexaoDB");
 const listarPedidos = async (req, res) => {
   try {
     let query = await knex("pedidos");
@@ -132,7 +67,4 @@ const listarPedidos = async (req, res) => {
     return res.status(500).json({ mensagem: "Erro interno do servidor!" });
   }
 };
-module.exports = {
-  cadastrarPedido,
-  listarPedidos,
-};
+module.exports = listarPedidos;
