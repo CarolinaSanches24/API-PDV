@@ -1,4 +1,4 @@
-const knex = require("../../config/conexaoDB");
+const knex = require("../../config/dataBase/conexaoDB");
 
 const validarDadosCliente = async (req, res, next) => {
   const { email, cpf } = req.body;

@@ -1,4 +1,4 @@
-const knex = require("../../config/conexaoDB");
+const knex = require("../../config/dataBase/conexaoDB");
 const validacaoPedido = async (req, res, next) => {
   const { cliente_id, pedido_produtos } = req.body;
   try {

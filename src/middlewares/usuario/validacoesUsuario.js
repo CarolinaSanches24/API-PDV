@@ -1,4 +1,4 @@
-const knex = require("../../config/conexaoDB");
+const knex = require("../../config/dataBase/conexaoDB");
 
 const verificaEmailCadastrado = async (req, res, next) => {
   const { email } = req.body;

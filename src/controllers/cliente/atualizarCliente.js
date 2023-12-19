@@ -1,4 +1,4 @@
-const knex = require("../../config/conexaoDB");
+const knex = require("../../config/dataBase/conexaoDB");
 const atualizarCliente = async (req, res) => {
   const { id } = req.params;
   const { nome, email, cpf, cep, rua, numero, bairro, cidade, estado } =

@@ -96,11 +96,11 @@ Oferece conexão com Banco de Dados Remoto ou local Ex: ElephantSQL ou PostgresS
 
 ##### Ex : Tabela Pedidos
 
-![Alt text](./img/image.png)
+![Alt text](./assets/image.png)
 
 ##### Ex : Tabela Pedidos_Produtos
 
-![Alt text](./img/image-1.png)
+![Alt text](./assets/image-1.png)
 
 ✅ Listar Pedidos<br>
 
@@ -350,20 +350,20 @@ Pronto, agora só aguardar a análise
 <div style="display:flex">
 <div style="width:500px">
 <p style="margin-right:50px">CAROLINA SANCHES</p>
-<p style="font-size=18px; text-align:justify"><b>Desenvolvedora de Software</b> <br>
+<p style="font-size=16px; text-align:justify"><b>Desenvolvedora de Software</b> <br>
 Graduada em Licenciatura em Informática<br>
 Pós Graduanda de Engenharia de Software<br>
 Técnica em Informática</p>
 </div>
-<img src="./img/Carolina Sanches Moraes .png" alt="Autora Carolina Sanches" style="border-radius:50px" width="150px" height="150px">
+<img src="./assets/Carolina Sanches Moraes .png" alt="Autora Carolina Sanches" style="border-radius:50px" width="150px" height="150px">
 
 <br>
 </div>
 <div style="display:flex">
-<div style="width:500px">
+<div style="width:400px">
 <p style="margin-left:50px">TAIS COSTA</p>
 <p style="font-size=18px; text-align:justify; margin-left:50px"><b>Desenvolvedora de Software</b> <br>
 </p>
 </div>
-<img src="./img/Tais Costa.jpeg" style="border-radius:50px" alt="Autora Carolina Sanches" width="150px" height="150px">
+<img src="./assets/Tais Costa.jpeg" style="border-radius:50px" alt="Autora Carolina Sanches" width="150px" height="150px">
 </div>

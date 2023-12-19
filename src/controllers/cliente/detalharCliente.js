@@ -1,4 +1,4 @@
-const knex = require("../../config/conexaoDB");
+const knex = require("../../config/dataBase/conexaoDB");
 const detalharCliente = async (req, res) => {
   const { id } = req.params;
   try {

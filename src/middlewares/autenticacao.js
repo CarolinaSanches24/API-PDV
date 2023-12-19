@@ -1,4 +1,4 @@
-const knex = require("../config/conexaoDB");
+const knex = require("../config/dataBase/conexaoDB");
 const jwt = require("jsonwebtoken");
 
 const autenticacao = async (req, res, next) => {

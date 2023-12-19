@@ -1,4 +1,4 @@
-const knex = require("../config/conexaoDB");
+const knex = require("../config/dataBase/conexaoDB");
 
 async function consultarDadosCliente(cliente_id) {
   try {

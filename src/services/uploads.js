@@ -1,4 +1,4 @@
-const s3 = require("../config/conexaoAWS");
+const s3 = require("../config/aws/conexaoAWS");
 
 const uploadImagem = async (path, buffer, mimetype) => {
   try {

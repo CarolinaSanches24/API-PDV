@@ -7,7 +7,7 @@ const {
   fazerLogin,
   detalharUsuario,
   atualizarUsuario,
-} = require("../controllers/usuario/usuario");
+} = require("../controllers/exportsControllers");
 const verificarCamposObrigatorios = require("../middlewares/validarCamposObrigatorios");
 const { esquemaUsuario, esquemaLogin } = require("../schemas/exportacao");
 const {

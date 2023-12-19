@@ -5,9 +5,9 @@ const {
   cadastrarProduto,
   atualizarProduto,
   excluirProduto,
-  listarProdutos,
-  obterProduto,
-} = require("../controllers/produto/produto");
+  listarProduto,
+  detalharProduto,
+} = require("../controllers/exportsControllers");
 const {
   verificaProdutoExiste,
   verificarExistenciaDeCategoria,
@@ -17,8 +17,8 @@ const validarCamposObrigatorios = require("../middlewares/validarCamposObrigator
 const { esquemaProduto } = require("../schemas/exportacao");
 const rotas = express();
 
-rotas.get("/produto", autenticacao, listarProdutos);
-rotas.get("/produto/:id", autenticacao, obterProduto);
+rotas.get("/produto", autenticacao, listarProduto);
+rotas.get("/produto/:id", autenticacao, detalharProduto);
 rotas.post(
   "/produto",
   multer.single("produto_imagem"),

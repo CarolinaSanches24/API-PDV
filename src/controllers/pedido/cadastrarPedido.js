@@ -1,5 +1,5 @@
-const transportador = require("../../config/conexaoNodemailer");
-const knex = require("../../config/conexaoDB");
+const transportador = require("../../config/nodemailer/conexaoNodemailer");
+const knex = require("../../config/dataBase/conexaoDB");
 const construirMensagemHTML = require("../../view/message");
 const { consultarDadosCliente } = require("../../queries/pedidoQueries");
 const cadastrarPedido = async (req, res) => {

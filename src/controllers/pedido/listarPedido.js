@@ -1,4 +1,4 @@
-const knex = require("../../config/conexaoDB");
+const knex = require("../../config/dataBase/conexaoDB");
 const listarPedidos = async (req, res) => {
   try {
     let query = await knex("pedidos");
