@@ -367,3 +367,4 @@ Técnica em Informática</p>
 </div>
 <img src="./assets/Tais Costa.jpeg" style="border-radius:50px" alt="Autora Carolina Sanches" width="150px" height="150px">
 </div>
+
