@@ -65,7 +65,7 @@ Oferece conexão com Banco de Dados Remoto ou local Ex: ElephantSQL ou PostgresS
 
 ##### Ex : Tabela Produtos
 
-![Alt text](./img/image-2.png)
+![Alt text](./assets/image-2.png)
 
 ✅ Atualizar Produto <br>
 
@@ -367,4 +367,3 @@ Técnica em Informática</p>
 </div>
 <img src="./assets/Tais Costa.jpeg" style="border-radius:50px" alt="Autora Carolina Sanches" width="150px" height="150px">
 </div>
-
