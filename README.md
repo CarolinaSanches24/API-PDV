@@ -346,7 +346,7 @@ Pronto, agora só aguardar a análise
 
 # :black_nib: Autoras
 
-<div style="display:inline">
+<div style="display:flex">
 <div style="display:flex">
 <div style="width:500px">
 <p style="margin-right:50px">CAROLINA SANCHES</p>
