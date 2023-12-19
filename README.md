@@ -345,7 +345,7 @@ Siga os passos abaixo para contribuir:
 Pronto, agora só aguardar a análise
 
 # :black_nib: Autoras
-
+<div style="display:inline">
 <div style="display:flex">
 <div style="display:flex">
 <div style="width:500px">
@@ -366,4 +366,5 @@ Técnica em Informática</p>
 </p>
 </div>
 <img src="./img/Tais Costa.jpeg" style="border-radius:50px" alt="Autora Carolina Sanches" width="150px" height="150px">
+</div>
 </div>
