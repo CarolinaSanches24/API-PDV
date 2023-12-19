@@ -1,5 +1,5 @@
 require("dotenv").config();
-const rotas = require("./rotas/exportacao");
+const rotas = require("./routes/exportacao");
 const express = require("express");
 const cors = require("cors");
 

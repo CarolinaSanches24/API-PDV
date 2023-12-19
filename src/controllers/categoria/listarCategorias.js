@@ -1,4 +1,4 @@
-const knex = require("../config/conexaoDB");
+const knex = require("../../config/conexaoDB");
 
 const listarCategorias = async (req, res) => {
   try {

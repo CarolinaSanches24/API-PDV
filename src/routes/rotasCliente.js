@@ -1,17 +1,17 @@
 const express = require("express");
-const autenticacao = require("../intermediarios/autenticacao");
-const validarCamposObrigatorios = require("../intermediarios/validarCamposObrigatorios");
+const autenticacao = require("../middlewares/autenticacao");
+const validarCamposObrigatorios = require("../middlewares/validarCamposObrigatorios");
 const {
   cadastrarCliente,
   atualizarCliente,
   listarClientes,
   detalharCliente,
-} = require("../controladores/cliente");
-const esquemaCliente = require("../esquemas/esquemaCliente");
+} = require("../controllers/exportsControllers");
+const { esquemaCliente } = require("../schemas/exportacao");
 const {
   validarDadosCliente,
   validarClienteExiste,
-} = require("../intermediarios/validacoesCliente");
+} = require("../middlewares/cliente/validacoesCliente");
 
 const rotas = express();
 

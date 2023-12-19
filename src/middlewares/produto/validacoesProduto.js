@@ -1,4 +1,4 @@
-const knex = require("../config/conexaoDB");
+const knex = require("../../config/conexaoDB");
 
 const verificaProdutoExiste = async (req, res, next) => {
   const { id } = req.params;

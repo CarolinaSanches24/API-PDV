@@ -1,5 +1,5 @@
 const express = require("express");
-const autenticacao = require("../intermediarios/autenticacao");
+const autenticacao = require("../middlewares/autenticacao");
 const rotas = express();
 
 const {
@@ -7,14 +7,14 @@ const {
   fazerLogin,
   detalharUsuario,
   atualizarUsuario,
-} = require("../controladores/usuario");
-const verificarCamposObrigatorios = require("../intermediarios/validarCamposObrigatorios");
-const { esquemaUsuario, esquemaLogin } = require("../esquemas/esquemaUsuario");
+} = require("../controllers/usuario/usuario");
+const verificarCamposObrigatorios = require("../middlewares/validarCamposObrigatorios");
+const { esquemaUsuario, esquemaLogin } = require("../schemas/exportacao");
 const {
   verificaEmailCadastrado,
   verificaEmailExiste,
-} = require("../intermediarios/validacoesUsuario");
-const validarCamposObrigatorios = require("../intermediarios/validarCamposObrigatorios");
+} = require("../middlewares/usuario/validacoesUsuario");
+const validarCamposObrigatorios = require("../middlewares/validarCamposObrigatorios");
 
 rotas.post(
   "/usuario",

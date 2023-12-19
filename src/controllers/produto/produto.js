@@ -1,6 +1,6 @@
-const knex = require("../config/conexaoDB");
-const s3 = require("../config/conexaoAWS");
-const { uploadImagem, deletarImagem } = require("../services/uploads");
+const knex = require("../../config/conexaoDB");
+const s3 = require("../../config/conexaoAWS");
+const { uploadImagem, deletarImagem } = require("../../services/uploads");
 const listarProdutos = async (req, res) => {
   const { categoria_id } = req.query;
   try {

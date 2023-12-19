@@ -1,4 +1,4 @@
-const knex = require("../config/conexaoDB");
+const knex = require("../../config/conexaoDB");
 const { hash, compare } = require("bcrypt");
 const jwt = require("jsonwebtoken");
 

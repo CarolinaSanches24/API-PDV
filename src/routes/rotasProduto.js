@@ -1,20 +1,20 @@
 const express = require("express");
-const autenticacao = require("../intermediarios/autenticacao");
-const multer = require("../intermediarios/multer");
+const autenticacao = require("../middlewares/autenticacao");
+const multer = require("../middlewares/multer");
 const {
   cadastrarProduto,
   atualizarProduto,
   excluirProduto,
   listarProdutos,
   obterProduto,
-} = require("../controladores/produto");
+} = require("../controllers/produto/produto");
 const {
   verificaProdutoExiste,
   verificarExistenciaDeCategoria,
   verificaPedidoAssociadoProduto,
-} = require("../intermediarios/validacoesProduto");
-const validarCamposObrigatorios = require("../intermediarios/validarCamposObrigatorios");
-const esquemaProduto = require("../esquemas/esquemaProduto");
+} = require("../middlewares/produto/validacoesProduto");
+const validarCamposObrigatorios = require("../middlewares/validarCamposObrigatorios");
+const { esquemaProduto } = require("../schemas/exportacao");
 const rotas = express();
 
 rotas.get("/produto", autenticacao, listarProdutos);

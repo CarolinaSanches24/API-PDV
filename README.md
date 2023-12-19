@@ -344,12 +344,26 @@ Siga os passos abaixo para contribuir:
 
 Pronto, agora só aguardar a análise
 
-# :black_nib: Autora
+# :black_nib: Autoras
 
-<p>CAROLINA SANCHES</p>
-<img src="./img/Carolina Sanches Moraes .png" width="150px" height="150px">
-<p class = "descricao_carol"><b>Desenvolvedora de Software</b> <br>
+<div style="display:flex">
+<div style="display:flex">
+<div style="width:500px">
+<p style="margin-right:50px">CAROLINA SANCHES</p>
+<p style="font-size=18px; text-align:justify"><b>Desenvolvedora de Software</b> <br>
 Graduada em Licenciatura em Informática<br>
 Pós Graduanda de Engenharia de Software<br>
 Técnica em Informática</p>
+</div>
+<img src="./img/Carolina Sanches Moraes .png" alt="Autora Carolina Sanches" style="border-radius:50px" width="150px" height="150px">
+
 <br>
+</div>
+<div style="display:flex">
+<div style="width:500px">
+<p style="margin-left:50px">TAIS COSTA</p>
+<p style="font-size=18px; text-align:justify; margin-left:50px"><b>Desenvolvedora de Software</b> <br>
+</p>
+</div>
+<img src="./img/Tais Costa.jpeg" style="border-radius:50px" alt="Autora Carolina Sanches" width="150px" height="150px">
+</div>
